@@ -24,10 +24,7 @@ public class WordLength
                 .max( Comparator.comparingInt(String::length) )
                 .orElse(null);
 
-        HashMap<String, Object> result = new HashMap<>();
-        result.put(WORD, str);
-        result.put(LENGTH, str.length());
-        return result;
+        return createResultObject(str);
     }
 
     /**
@@ -49,5 +46,22 @@ public class WordLength
         if(!input.matches(ALPHA_NUMERIC)){
             throw new IllegalArgumentException("Invalid argument. Input string cannot be empty.");
         }
+    }
+
+    /**
+     * Create a HashMap with a given string and length
+     * @param str a valid string
+     * @return HashMap instance
+     */
+    private Map<String, Object> createResultObject(String str){
+        HashMap<String, Object> result = new HashMap<>();
+
+        if(str == null){
+            return result;
+        }
+
+        result.put(WORD, str);
+        result.put(LENGTH, str.length());
+        return result;
     }
 }
