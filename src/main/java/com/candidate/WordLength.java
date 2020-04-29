@@ -1,15 +1,14 @@
 package com.candidate;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Hello world!
- *
  */
-public class WordLength
-{
+public class WordLength {
     private static final String ALPHA_NUMERIC = ".*\\w.*";
     private static final String WHITE_SPACE = " ";
 
@@ -21,14 +20,12 @@ public class WordLength
         String sanitizedInput = sanitise(input);
 
         String str = Arrays.stream(sanitizedInput.split(WHITE_SPACE))
-                .max( Comparator.comparingInt(String::length) )
-                .orElse(null);
+                .max(Comparator.comparingInt(String::length)).get();
 
         return createResultObject(str);
     }
 
     /**
-     *
      * @param input String
      * @return String contains only alpha numeric characters
      * and white spaces among words
@@ -40,25 +37,23 @@ public class WordLength
     /**
      * Validate an input string by making sure that the string contains at least one
      * alpha-numeric character. Throws IllegalArgumentException otherwise.
+     *
      * @param input String
      */
-    private void validate(String input){
-        if(!input.matches(ALPHA_NUMERIC)){
+    private void validate(String input) {
+        if (!input.matches(ALPHA_NUMERIC)) {
             throw new IllegalArgumentException("Invalid argument. Input string cannot be empty.");
         }
     }
 
     /**
      * Create a HashMap with a given string and length
+     *
      * @param str a valid string
      * @return HashMap instance
      */
-    private Map<String, Object> createResultObject(String str){
+    private Map<String, Object> createResultObject(String str) {
         HashMap<String, Object> result = new HashMap<>();
-
-        if(str == null){
-            return result;
-        }
 
         result.put(WORD, str);
         result.put(LENGTH, str.length());
