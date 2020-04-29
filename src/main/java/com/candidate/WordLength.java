@@ -3,16 +3,13 @@ package com.candidate;
 import java.util.*;
 import java.util.function.Predicate;
 
-/**
- * Hello world!
- */
 public class WordLength {
     private static final String ALPHA_NUMERIC = ".*\\w.*";
     private static final String WHITE_SPACE = " ";
     private static final Set<String> TO_FILTER = new HashSet<>(Arrays.asList("a", "A", "The", "the", "of", "and"));
 
-    public static final String WORD = "word";
-    public static final String LENGTH = "length";
+    protected static final String WORD = "word";
+    protected static final String LENGTH = "length";
 
     public Map<String, Object> getLongestWordAndLength(String input) {
         validate(input);
@@ -31,13 +28,20 @@ public class WordLength {
     private String largestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
                 .filter(wordFilter())
-                .max(Comparator.comparingInt(String::length)).get();
+                .max(stringComparator()).get();
     }
 
     private String shortestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
                 .filter(wordFilter())
-                .min(Comparator.comparingInt(String::length)).get();
+                .min(stringComparator()).get();
+    }
+
+    /**
+     * Returns a simple length based string comparator
+     */
+    private Comparator<String> stringComparator() {
+        return Comparator.comparingInt(String::length);
     }
 
     /**
