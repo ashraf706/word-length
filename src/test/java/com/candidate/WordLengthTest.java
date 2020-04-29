@@ -92,7 +92,18 @@ public class WordLengthTest {
 
         Map<String, Object> result = wordLength.getShortestWordAndLength(str);
 
-        assertThat(result.get(WORD), is("The"));
+        assertThat(result.get(WORD), is("cow"));
         assertThat(result.get(LENGTH), is(3));
+    }
+
+    @Test
+    @DisplayName("Function should be able to filter out 'the', 'The' , 'a', 'A', 'and', 'of' etc.")
+    void shouldFilterWords() {
+        String str = "A little black bird";
+
+        Map<String, Object> result = wordLength.getShortestWordAndLength(str);
+
+        assertThat(result.get(WORD), is("bird"));
+        assertThat(result.get(LENGTH), is(4));
     }
 }

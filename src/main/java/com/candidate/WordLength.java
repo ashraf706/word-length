@@ -1,9 +1,7 @@
 package com.candidate;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Hello world!
@@ -11,6 +9,7 @@ import java.util.Map;
 public class WordLength {
     private static final String ALPHA_NUMERIC = ".*\\w.*";
     private static final String WHITE_SPACE = " ";
+    private static final Set<String> TO_FILTER = new HashSet<>(Arrays.asList("a", "A", "The", "the", "of", "and"));
 
     public static final String WORD = "word";
     public static final String LENGTH = "length";
@@ -31,12 +30,21 @@ public class WordLength {
 
     private String largestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
+                .filter(wordFilter())
                 .max(Comparator.comparingInt(String::length)).get();
     }
 
     private String shortestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
+                .filter(wordFilter())
                 .min(Comparator.comparingInt(String::length)).get();
+    }
+
+    /**
+     * A predicate to check whether the set TO_FILTER contains a word or not
+     */
+    private Predicate<String> wordFilter() {
+        return s -> !TO_FILTER.contains(s);
     }
 
     /**
