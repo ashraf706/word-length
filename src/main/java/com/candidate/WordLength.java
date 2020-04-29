@@ -19,10 +19,12 @@ public class WordLength {
         validate(input);
         String sanitizedInput = sanitise(input);
 
-        String str = Arrays.stream(sanitizedInput.split(WHITE_SPACE))
-                .max(Comparator.comparingInt(String::length)).get();
+        return createResultObject(largestWord(sanitizedInput));
+    }
 
-        return createResultObject(str);
+    private String largestWord(String str){
+        return Arrays.stream(str.split(WHITE_SPACE))
+                .max(Comparator.comparingInt(String::length)).get();
     }
 
     /**
