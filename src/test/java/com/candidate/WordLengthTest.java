@@ -84,4 +84,15 @@ public class WordLengthTest {
         assertThat(result.get(WORD), is("jumped"));
         assertThat(result.get(LENGTH), is(6));
     }
+
+    @Test
+    @DisplayName("Returns shortest word and length")
+    void shouldReturnShortestWordAndLength() {
+        String str = "The cow jumped over the moon.";
+
+        Map<String, Object> result = wordLength.getShortestWordAndLength(str);
+
+        assertThat(result.get(WORD), is("The"));
+        assertThat(result.get(LENGTH), is(3));
+    }
 }

@@ -22,9 +22,21 @@ public class WordLength {
         return createResultObject(largestWord(sanitizedInput));
     }
 
+    public Map<String, Object> getShortestWordAndLength(String input) {
+        validate(input);
+        String sanitizedInput = sanitise(input);
+
+        return createResultObject(shortestWord(sanitizedInput));
+    }
+
     private String largestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
                 .max(Comparator.comparingInt(String::length)).get();
+    }
+
+    private String shortestWord(String str){
+        return Arrays.stream(str.split(WHITE_SPACE))
+                .min(Comparator.comparingInt(String::length)).get();
     }
 
     /**
