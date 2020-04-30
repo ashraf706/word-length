@@ -4,8 +4,11 @@
 - junit 5, hamcrest and maven-surefire-plugin
 
 ##Running the Tests
+- Execute `git clone https://github.com/ashraf706/word-length.git` to clone the public repository to your local machine.
+- From command line change directory and go to the downloaded __word-length__ directory. 
 - To run the test execute `mvn test` from command line.
-Please make sure you have the maven dependencies install in your local maven repository.
+This should execute all tests in  __com.candidate.WordLengthTest__ under test package.
+Please make sure you have the maven dependencies install in your local maven repository in case you have problem running the tests.
 You can also execute `maven clean install` to make sure all the dependencies are in place.
 
 ##Assumption I made
