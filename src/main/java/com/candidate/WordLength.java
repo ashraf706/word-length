@@ -28,13 +28,13 @@ public class WordLength {
     private String largestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
                 .filter(wordFilter())
-                .max(stringComparator()).get();
+                .max(stringComparator()).orElse(null);
     }
 
     private String shortestWord(String str){
         return Arrays.stream(str.split(WHITE_SPACE))
                 .filter(wordFilter())
-                .min(stringComparator()).get();
+                .min(stringComparator()).orElse(null);
     }
 
     /**
@@ -67,8 +67,8 @@ public class WordLength {
      * @param input String
      */
     private void validate(String input) {
-        if (!input.matches(ALPHA_NUMERIC)) {
-            throw new IllegalArgumentException("Invalid argument. Input string cannot be empty.");
+        if (input == null || !input.matches(ALPHA_NUMERIC)) {
+            throw new IllegalArgumentException("Invalid argument. Argument cannot be empty or null. Argument must contain at least one valid alpha-numeric character.");
         }
     }
 
@@ -81,8 +81,15 @@ public class WordLength {
     private Map<String, Object> createResultObject(String str) {
         HashMap<String, Object> result = new HashMap<>();
 
-        result.put(WORD, str);
-        result.put(LENGTH, str.length());
+        if(str == null){
+            result.put(WORD, "No valid word found");
+            result.put(LENGTH, 0);
+        }
+        else {
+            result.put(WORD, str);
+            result.put(LENGTH, str.length());
+        }
+
         return result;
     }
 }

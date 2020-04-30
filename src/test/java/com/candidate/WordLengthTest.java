@@ -20,6 +20,7 @@ public class WordLengthTest {
     void setup(){
         wordLength = new WordLength();
     }
+
     @Test()
     @DisplayName("Throws IllegalArgumentException for empty input string")
     public void shouldThrowExceptionForEmptyString() {
@@ -28,6 +29,13 @@ public class WordLengthTest {
                     String emptyString = "";
                     wordLength.getLongestWordAndLength(emptyString);
                 });
+    }
+
+    @Test()
+    @DisplayName("Throws IllegalArgumentException for null input")
+    public void shouldThrowExceptionForNullInput() {
+        assertThrows(IllegalArgumentException.class,
+                () -> wordLength.getLongestWordAndLength(null));
     }
 
     @Test
@@ -105,5 +113,16 @@ public class WordLengthTest {
 
         assertThat(result.get(WORD), is("bird"));
         assertThat(result.get(LENGTH), is(4));
+    }
+
+    @Test
+    @DisplayName("Shows message when input string does not contain a valid word")
+    void shouldShowMessageWhenInputDoesNotContainValidWord() {
+        String str = "The";
+
+        Map<String, Object> result = wordLength.getShortestWordAndLength(str);
+
+        assertThat(result.get(WORD), is("No valid word found"));
+        assertThat(result.get(LENGTH), is(0));
     }
 }
